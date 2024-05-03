@@ -1,0 +1,15 @@
+meta {
+  name: get-scheme
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://{{baseUrl}}/
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
