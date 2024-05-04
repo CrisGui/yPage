@@ -3,7 +3,10 @@ import cors from "cors"
 import datejs from "datejs"
 
 import { validatePerson, validatePartialPerson } from "./scheme/validations.js"
-import users from "../tests/MOCK_DATA.json" assert {type: "json"}
+//import users from "../tests/MOCK_DATA.json" assert {type: "json"}
+import { createRequire } from "node:module"
+const require = createRequire(import.meta.url)
+const users = require("../tests/MOCK_DATA.json")
 
 const app = express()
 
@@ -13,9 +16,12 @@ const PORT = process.env.PORT ?? 2350
 const HOST = process.env.HOST ?? "localhost"
 const PROTOCOL = process.env.PROTOCOL ?? "http"
 
-const WHITELIST = ["https://ypage.com"]
 const corsOptions = {
   origin: (origin, callback) => {
+    const WHITELIST = [
+      "https://ypage.com",
+      "http://localhost:2350",
+    ]
     if (WHITELIST.includes(origin) || !origin) {
       callback(null, true)
     } else {
