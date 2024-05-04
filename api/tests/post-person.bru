@@ -1,0 +1,43 @@
+meta {
+  name: post-person
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://{{baseUrl}}/person/
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "full_name": "Reik Rybak",
+    "first_name": "Reik",
+    "last_name": "Rybak",
+    "email": "reik@rybak.com",
+    "gender": "Male",
+    "avatar": "https://robohash.org/quiquasanimi.png?size=50x50&set=set1",
+    "username": "rirykbak213",
+    "password": "yR7}F4",
+    "password_hash": "$2a$04$nmpZnYXOxM/Uuu0edohrnugSk3HbT/tRsTeK6neMj5NnYtcHBHDuG",
+    "company": "Postman",
+    "department": "Product Development",
+    "job": "Developer",
+    "country": "United States",
+    "state": "Texas",
+    "city": "Austin",
+    "address_street": "8 Woods Square",
+    "address_line": "2rd Floor",
+    "linkedln_profile": "https://toplist.cz/sit/amet/eros/suspendisse/accumsan/tortor.png"
+  }
+}
+
+assert {
+  res.status: eq 201
+  res.body: isJson
+}

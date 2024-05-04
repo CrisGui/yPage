@@ -1,0 +1,31 @@
+meta {
+  name: patch-person
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://{{baseUrl}}/person/16eb9cd7-6180-44f2-8a80-c1538124ae73
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "avatar": "https://robohash.org/quiquasanimi.png?size=50x50&set=set1",
+    "username": "rirykbak213",
+    "state": "Texas",
+    "city": "Austin",
+    "address_street": "8 Woods Square",
+    "address_line": "2rd Floor"
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body: isJson
+}
