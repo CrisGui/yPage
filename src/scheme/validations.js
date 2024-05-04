@@ -1,19 +1,19 @@
 import zod from "zod"
 
 const schemePerson = zod.object({
-  fullname: zod.string({
+  full_name: zod.string({
     required_error: "fullname is required",
     invalid_type_error: "fullname must be a string",
   })
     .max(511)
     .min(1),
-  firstname: zod.string({
+  first_name: zod.string({
     required_error: "firstname is required",
     invalid_type_error: "firstname must be a string",
   })
     .max(255)
     .min(1),
-  lastname: zod.string({
+  last_name: zod.string({
     required_error: "lastname is required",
     invalid_type_error: "lastname must be a string",
   })
