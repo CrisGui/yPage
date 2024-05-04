@@ -35,12 +35,12 @@ app.get("/person", (req, res) => {
 app.get("/person/:id", (req, res) => {
   const { id } = req.params
   const personIndex = users.findIndex(user => user.id === id)
-  if (personIndex === -1) return res.status(404)
+  if (personIndex === -1) return res.status(404).json({ error: "person not found" })
   res.status(200).json(users[personIndex])
 })
 app.post("/person", (req, res) => {
   const result = validatePerson(req.body)
-  if (!result.success) return res.status(422)
+  if (!result.success) return res.status(422).json({ error: result.error })
 
   const newPerson = {
     id: crypto.randomUUID(),
@@ -49,20 +49,21 @@ app.post("/person", (req, res) => {
     ...req.body
   }
   users.push(newPerson)
-  res.status(201)
+  res.status(201).json(newPerson)
 })
 app.patch("/person/:id", (req, res) => {
   const { id } = req.params
   const personIndex = users.findIndex(user => user.id === id)
-  if (personIndex === -1) return res.status(404)
+  if (personIndex === -1) return res.status(404).json({ error: "person not found" })
   const result = validatePartialPerson(req.body)
-  if (!result.success) return res.status(422)
+  if (!result.success) return res.status(422).json({ error: result.error })
 
   const updatedPerson = {
+    ...users[personIndex],
     ...req.body
   }
-  users.push(updatedPerson)
-  res.status(200)
+  users[updatedPerson] = updatedPerson
+  res.status(200).json(updatedPerson)
 })
 
 app.listen(PORT, () => {
