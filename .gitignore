@@ -1,6 +1,6 @@
 pnpm-lock.yaml
 node_modules/
-src/scheme/scheme.json
+backend/src/scheme/scheme.json
 commands.txt
 user_password.txt
 root_password.txt
