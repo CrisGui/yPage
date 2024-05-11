@@ -41,6 +41,9 @@ services:
     # - 3306
     networks:
       - private
+networks:
+  public:
+  private:
 
 secrets:
   db-root-password:
